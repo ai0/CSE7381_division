@@ -1,6 +1,6 @@
 # CSE7381 Division
 
-## Running
+## Run Code
 
 ```bash
 verilog ./div.v ./div_tb.v
