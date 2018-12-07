@@ -3,7 +3,7 @@ module DivideTestBench();
     reg [31:0] shadow_quot, shadow_rem;
     reg [31:0]  a, b;
     integer    i;
-    parameter  num_tests = 10; // num of test for each positive and negative number
+    parameter  num_tests = 20; // num of tests, can be changed to any positive number
     reg        sign;
 
     reg        clk;
@@ -13,8 +13,9 @@ module DivideTestBench();
     reg        start;
     wire       ready;
 
-    wire [31:0] infinity;
-    assign     infinity = 32'hffff;
+    // pre-define infinity for verify divide by zero
+    wire [63:0] infinity;
+    assign     infinity = 63'hffffffff;
 
     initial sign = 0;
 
@@ -26,7 +27,6 @@ module DivideTestBench();
 
         while ( !ready ) #1;
 
-    // test positive numbers
         for (i=0; i<num_tests; i=i+1) begin:A
 
          integer shadow_quot, shadow_rem;
@@ -46,11 +46,11 @@ module DivideTestBench();
 
          #1;
          if ( quotient != shadow_quot || remainder != shadow_rem ) begin
-            $display("Wrong quotient: %h / %h  =  %h r %h  !=  %h r %h (correct)",
+            $display("[ERR] Wrong quotient: %h / %h  =  %h r %h  !=  %h r %h (correct)",
                      a, b, quotient, remainder, shadow_quot, shadow_rem);
             $stop;
          end
-		 $display($time, " a = %b, b = %b, shadow_quot=%b, shadow_rem=%b", a, b, shadow_quot,shadow_rem);
+		 $display("[TESTCASE - PASS] ", $time, " a = %b, b = %b, shadow_quot=%b, shadow_rem=%b", a, b, shadow_quot,shadow_rem);
       end
 
       $display("Tried %d divide tests",num_tests);

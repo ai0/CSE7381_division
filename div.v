@@ -17,7 +17,7 @@ module Divide(ready,quotient,remainder,dividend,divider,sign,clk);
    reg [5:0]     bit; 
    wire          ready = !bit;
 
-   initial bit = 0;
+   initial bit = 0;  // for repeating 32 times
    initial negative_output = 0;
 
    always @( posedge clk ) 
@@ -56,8 +56,10 @@ module Divide(ready,quotient,remainder,dividend,divider,sign,clk);
                    quotient_temp : 
                    ~quotient_temp + 1'b1;
 
+        // shift right divider_copy 1 bit
         divider_copy = divider_copy >> 1;
-        bit = bit - 1'b1;
+
+        bit = bit - 1'b1; // repeat 32 times
 
      end
 endmodule
