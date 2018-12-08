@@ -41,7 +41,7 @@ module DivideTestBench();
 
          while ( !ready ) #1;
 
-         shadow_quot = b ? a / b : infinity;
+         shadow_quot = b ? a / b : infinity; // when divisor is 0, the result goes to infinity
          shadow_rem  = b ? a % b : a;
 
          #1;
