@@ -1,6 +1,6 @@
 module DivideTestBench();
     wire [31:0] quotient, remainder;
-    reg [31:0] shadow_quot, shadow_rem;
+    reg [31:0] shadow_quot, shadow_rem; // check whether results in testbench are the same as results in hardware
     reg [31:0]  a, b;
     integer    i;
     parameter  num_tests = 20; // num of tests, can be changed to any positive number
